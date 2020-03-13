@@ -390,26 +390,33 @@ void sched_ps () {
 	// print out relevant information
 	struct sched_procnode * pn;
 	for (pn = proc_anchor.next; pn->proc != NULL; pn = pn->next) {
-		fprintf (stderr, "%04d\t", pn->proc->pid);
-		fprintf (stderr, "%04d\t", pn->proc->ppid);
+		fprintf (stdout, "%04d\t", pn->proc->pid);
+    fflush(stdout);
+		fprintf (stdout, "%04d\t", pn->proc->ppid);
+    fflush(stdout);
 		switch (pn->proc->task_state) {
 			case SCHED_READY:
-				fprintf (stderr, "SCHED_READY\t");
+				fprintf (stdout, "SCHED_READY\t");
 				break;
 			case SCHED_RUNNING:
-				fprintf (stderr, "SCHED_RUNNING\t");
+				fprintf (stdout, "SCHED_RUNNING\t");
 				break;
 			case SCHED_SLEEPING:
-				fprintf (stderr, "SCHED_SLEEPING\t");
+				fprintf (stdout, "SCHED_SLEEPING\t");
 				break;
 			case SCHED_ZOMBIE:
-				fprintf (stderr, "SCHED_ZOMBIE\t");
+				fprintf (stdout, "SCHED_ZOMBIE\t");
 				break;
 		}
-		fprintf (stderr, "%x\t", pn->proc->stack_base);
-		fprintf (stderr, "%d\t", pn->proc->nice);
-		fprintf (stderr, "%d\t", pn->proc->priority);
-		fprintf (stderr, "%llu\n", pn->proc->cpu_time);
+    fflush(stdout);
+		fprintf (stdout, "%x\t", pn->proc->stack_base);
+    fflush(stdout);
+		fprintf (stdout, "%d\t", pn->proc->nice);
+    fflush(stdout);
+		fprintf (stdout, "%d\t", pn->proc->priority);
+    fflush(stdout);
+		fprintf (stdout, "%llu\n", pn->proc->cpu_time);
+    fflush(stdout);
 	}
 	
 	// unblock and restore signals
